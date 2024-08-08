@@ -339,11 +339,7 @@ restartBtn.addEventListener('click', () => {
     const prevDifficulty = difficultyLevel;
     difficultyLevel = document.getElementById('difficultySelect').value;
     if(difficultyLevel == 'default') difficultyLevel = prevDifficulty;
-    if(difficultyLevel == 'custom'){
-        startCustom();
-    }else{
-        start();
-    }
+    start();
 });
 
 function startCustom(){
@@ -388,9 +384,9 @@ function startCustom(){
         const formData = new FormData(event.target);
         const formObject = Object.fromEntries(formData.entries());
 
-        gameSet.cols = parseInt(formObject['custom-cols']);
-        gameSet.rows = parseInt(formObject['custom-rows']);
-        gameSet.nbMines = parseInt(formObject['custom-mines']);
+        gameSet.cols = parseInt(formObject['custom-cols']) || 8;
+        gameSet.rows = parseInt(formObject['custom-rows']) || 8;
+        gameSet.nbMines = parseInt(formObject['custom-mines']) || 10;
 
         blur.remove();
         popUp.style.animation = 'customPopUp-animation-reverse 0.5s forwards ease-in-out';
